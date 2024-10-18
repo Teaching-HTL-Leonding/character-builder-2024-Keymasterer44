@@ -1,4 +1,4 @@
-import {Component, computed, effect, inject, signal} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {CreateCharacterService, BuildCharacterRequest} from '../create-character.service';
 
 @Component({
@@ -12,31 +12,28 @@ export class RandomizeCharacterComponent {
   private readonly createCharacterService = inject(CreateCharacterService);
   characterOptions = signal<BuildCharacterRequest | null>(null)
   scaleFactor = signal(1);
-  url = computed(() => this.getUrl());
-
-  constructor() {
-    effect(async () => {
-      if (!this.characterOptions()) return;
-    })
-  }
+  url = signal<string |null>(null)
 
   async createRandomCharacter() {
     const options = await this.createCharacterService.getRandomImageOptions()
     this.characterOptions.set(options);
+    await this.setUrl();
   }
 
-  increaseScale() {
+  async increaseScale() {
     if (this.scaleFactor() >= 2) return;
     this.scaleFactor.update((prev) => (prev*10+1)/10);
+    await this.setUrl();
   }
 
-  decreaseScale() {
+  async decreaseScale() {
     if (this.scaleFactor() <= 0.1) return
     this.scaleFactor.update((prev) => (prev*10-1)/10);
+    await this.setUrl();
   }
 
-  async getUrl(): Promise<string | null> {
-    if (!this.characterOptions()) return null;
-    return (await this.createCharacterService.buildCharacter(this.characterOptions()!.eye, this.characterOptions()!.hasHammer, this.characterOptions()!.mouth, this.characterOptions()!.rightHand, this.characterOptions()!.hasTail)).url + "?scale=" + this.scaleFactor()
+  async setUrl() {
+    if (!this.characterOptions()) return;
+    this.url.set((await this.createCharacterService.buildCharacter(this.characterOptions()!.eye, this.characterOptions()!.hasHammer, this.characterOptions()!.mouth, this.characterOptions()!.rightHand, this.characterOptions()!.hasTail)).url + "?scale=" + this.scaleFactor());
   }
 }
