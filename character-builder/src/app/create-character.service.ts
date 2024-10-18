@@ -2,9 +2,12 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
 
-type Eye = "NoEye" | "HalfOpen" | "Closed" | "Open";
-type Mouth = "NoMouth" | "Happy" | "Normal" | "Unhappy";
-type RightHand = "NoHand" | "Normal" | "Victory";
+export const eyeOptions: string[] = ["NoEye", "HalfOpen", "Closed", "Open"] as const;
+export const mouthOptions: string[] = ["NoMouth", "Happy", "Normal", "Unhappy"] as const;
+export const rightHandOptions: string[] = ["NoHand", "Normal", "Victory"] as const;
+type Eye = typeof eyeOptions[number];
+type Mouth = typeof mouthOptions[number];
+type RightHand = typeof rightHandOptions[number];
 
 type BuildCharacterRequest = {
   eye: Eye;
