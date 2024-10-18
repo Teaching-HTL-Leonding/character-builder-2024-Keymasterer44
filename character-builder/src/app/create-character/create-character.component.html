@@ -1,0 +1,35 @@
+<h1>Create Character</h1>
+<main>
+  <form>
+    <label for="eyes">Eyes</label>
+    <select id="eyes" name="Eyes" [(ngModel)]="eye">
+      @for(option of eyeOptions; track option) {
+        <option value="{{option}}">{{option}}</option>
+      }
+    </select>
+    <label for="hammer">Has Hammer</label>
+    <input type="checkbox" id="hammer" name="Hammer" [(ngModel)]="hasHammer">
+    <label for="mouth">Mouth</label>
+    <select id="mouth" name="Mouth" [(ngModel)]="mouth">
+      @for(option of mouthOptions; track option) {
+        <option value="{{option}}">{{option}}</option>
+      }
+    </select>
+    <label for="rightHand">Right Hand</label>
+    <select id="rightHand" name="Right Hand" [(ngModel)]="rightHand">
+      @for(option of rightHandOptions; track option) {
+        <option value="{{option}}">{{option}}</option>
+      }
+    </select>
+    <label for="tail">Has Tail</label>
+    <input type="checkbox" id="tail" name="Tail" [(ngModel)]="hasTail">
+    <div id="form-buttons">
+      <button type="submit" (click)="createCharacter()">Build Image</button>
+      <button type="submit" (click)="createRandomCharacter()">Feeling lucky</button>
+    </div>
+  </form>
+
+  @if(imageUrl()) {
+    <img src="{{imageUrl()}}" width="100px" alt="Character">
+  }
+</main>

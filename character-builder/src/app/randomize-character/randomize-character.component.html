@@ -1,0 +1,7 @@
+<button (click)="increaseScale()">+</button>
+<button (click)="decreaseScale()">-</button>
+<button (click)="createRandomCharacter()">Next</button>
+
+@if (url()) {
+    <img src="{{ url() }}" alt="">
+}
