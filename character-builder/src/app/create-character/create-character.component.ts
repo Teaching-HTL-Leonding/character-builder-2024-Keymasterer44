@@ -37,7 +37,14 @@ export class CreateCharacterComponent {
     this.imageUrl.set(imageId.url);
   }
 
-  createRandomCharacter() {
-
+  async createRandomCharacter() {
+    await this.createCharacterService.getRandomImageOptions().then((options) => {
+      this.eye.set(options.eye);
+      this.hasHammer.set(options.hasHammer);
+      this.mouth.set(options.mouth);
+      this.rightHand.set(options.rightHand);
+      this.hasTail.set(options.hasTail);
+    });
+    await this.createCharacter();
   }
 }
