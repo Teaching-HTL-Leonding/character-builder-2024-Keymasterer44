@@ -9,7 +9,7 @@ type Eye = typeof eyeOptions[number];
 type Mouth = typeof mouthOptions[number];
 type RightHand = typeof rightHandOptions[number];
 
-type BuildCharacterRequest = {
+export type BuildCharacterRequest = {
   eye: Eye;
   hasHammer: boolean;
   mouth: Mouth;
