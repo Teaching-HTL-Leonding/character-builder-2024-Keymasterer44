@@ -1,0 +1,15 @@
+nav {
+  height: 7vh;
+  display: flex;
+  justify-content: space-evenly;
+  background: grey;
+  align-items: center;
+  border-radius: 20px;
+}
+
+nav * {
+    font-size: 1.5em;
+    text-decoration: none;
+    color: black;
+  font-family: Arial, sans-serif;
+}

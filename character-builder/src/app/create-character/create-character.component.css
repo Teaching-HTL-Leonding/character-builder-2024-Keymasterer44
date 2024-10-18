@@ -1,8 +1,12 @@
+h1 {
+  text-align: center;
+  font-family: Arial sans-serif;
+}
+
 main {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
   flex-direction: row;
   font-family: Arial, sans-serif;
 }
